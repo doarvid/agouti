@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"net/http"
+	"reflect"
 	"strings"
 
 	"github.com/sclevine/agouti/api/internal/bus"
@@ -251,7 +252,34 @@ func (s *Session) Execute(body string, arguments []interface{}, result interface
 	}{body, arguments}
 
 	if err := s.Send("POST", "execute", request, result); err != nil {
-		return err
+		if _, ok := result.(*string); !ok {
+			return err
+		}
+
+		Value := []struct {
+			ELEMENT string `json:"ELEMENT"`
+		}{}
+		if err := s.Send("POST", "execute", request, &Value); err != nil {
+			return err
+		}
+		if len(Value) < 1 {
+			return errors.New("no element")
+		}
+		elmt := &Element{Value[0].ELEMENT, s}
+
+		innerHTML, err := elmt.GetAttribute("innerHTML")
+		if err != nil {
+			return err
+		}
+
+		typ := reflect.TypeOf(result)
+		val := reflect.ValueOf(result)
+		if typ.Kind() == reflect.Ptr {
+			val = val.Elem()
+		} else {
+			panic("inStructPtr must be ptr to struct")
+		}
+		val.Set(reflect.ValueOf(innerHTML))
 	}
 
 	return nil

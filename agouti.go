@@ -5,9 +5,25 @@ package agouti
 
 import (
 	"fmt"
+	"os"
+	"path"
 	"path/filepath"
 	"runtime"
+	"strings"
 )
+
+func locateBin(bin string) string {
+
+	pathsstr := os.Getenv("PATH")
+	paths := strings.Split(pathsstr, ";")
+	for _, p := range paths {
+		rp := path.Join(p, bin)
+		if _, err := os.Stat(rp); err == nil {
+			return rp
+		}
+	}
+	return bin
+}
 
 // PhantomJS returns an instance of a PhantomJS WebDriver.
 //
@@ -19,7 +35,13 @@ import (
 // (and not the NewPage method) for this Option to take effect on any
 // PhantomJS page.
 func PhantomJS(options ...Option) *WebDriver {
-	command := []string{"phantomjs", "--webdriver={{.Address}}"}
+	var binaryName string
+	if runtime.GOOS == "windows" {
+		binaryName = locateBin("phantomjs.exe")
+	} else {
+		binaryName = "phantomjs"
+	}
+	command := []string{binaryName, "--webdriver={{.Address}}"}
 	defaultOptions := config{}.Merge(options)
 	if !defaultOptions.RejectInvalidSSL {
 		command = append(command, "--ignore-ssl-errors=true")

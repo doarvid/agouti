@@ -254,9 +254,11 @@ func (p *Page) HTML() (string, error) {
 // Values provided in arguments are converted into javascript objects.
 // If the body returns a value, it will be unmarshalled into the result argument.
 // Simple example:
-//    var number int
-//    page.RunScript("return test;", map[string]interface{}{"test": 100}, &number)
-//    fmt.Println(number)
+//
+//	var number int
+//	page.RunScript("return test;", map[string]interface{}{"test": 100}, &number)
+//	fmt.Println(number)
+//
 // -> 100
 func (p *Page) RunScript(body string, arguments map[string]interface{}, result interface{}) error {
 	var (
@@ -273,6 +275,18 @@ func (p *Page) RunScript(body string, arguments map[string]interface{}, result i
 	cleanBody := fmt.Sprintf("return (function(%s) { %s; }).apply(this, arguments);", argumentList, body)
 
 	if err := p.session.Execute(cleanBody, values, result); err != nil {
+		return fmt.Errorf("failed to run script: %s", err)
+	}
+
+	return nil
+}
+
+func (p *Page) RunRawScript(body string, result interface{}) error {
+	var (
+		values []interface{}
+	)
+
+	if err := p.session.Execute(body, values, result); err != nil {
 		return fmt.Errorf("failed to run script: %s", err)
 	}
 
