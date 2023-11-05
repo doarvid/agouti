@@ -1,10 +1,10 @@
 package integration_test
 
 import (
+	"github.com/doarvid/agouti"
+	. "github.com/doarvid/agouti/matchers"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/sclevine/agouti"
-	. "github.com/sclevine/agouti/matchers"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"

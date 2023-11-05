@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/doarvid/agouti"
 	"github.com/onsi/gomega/format"
-	"github.com/sclevine/agouti"
 )
 
 type LogMatcher struct {

@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/sclevine/agouti/api/internal/bus"
+	"github.com/doarvid/agouti/api/internal/bus"
 )
 
 type Session struct {

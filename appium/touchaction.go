@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sclevine/agouti"
-	"github.com/sclevine/agouti/api"
-	"github.com/sclevine/agouti/api/mobile"
-	"github.com/sclevine/agouti/internal/element"
-	"github.com/sclevine/agouti/internal/target"
+	"github.com/doarvid/agouti"
+	"github.com/doarvid/agouti/api"
+	"github.com/doarvid/agouti/api/mobile"
+	"github.com/doarvid/agouti/internal/element"
+	"github.com/doarvid/agouti/internal/target"
 )
 
 type TouchAction struct {

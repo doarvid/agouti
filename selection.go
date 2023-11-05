@@ -3,9 +3,9 @@ package agouti
 import (
 	"fmt"
 
-	"github.com/sclevine/agouti/api"
-	"github.com/sclevine/agouti/internal/element"
-	"github.com/sclevine/agouti/internal/target"
+	"github.com/doarvid/agouti/api"
+	"github.com/doarvid/agouti/internal/element"
+	"github.com/doarvid/agouti/internal/target"
 )
 
 // Selection instances refer to a selection of elements.
@@ -17,9 +17,12 @@ import (
 //
 // Examples:
 //
-//    selection.Find("table").All("tr").At(2).First("td input[type=checkbox]").Check()
+//	selection.Find("table").All("tr").At(2).First("td input[type=checkbox]").Check()
+//
 // Checks the first checkbox in the third row of the only table.
-//    selection.Find("table").All("tr").Find("td").All("input[type=checkbox]").Check()
+//
+//	selection.Find("table").All("tr").Find("td").All("input[type=checkbox]").Check()
+//
 // Checks all checkboxes in the first-and-only cell of each row in the only table.
 type Selection struct {
 	selectable
@@ -43,7 +46,8 @@ func newSelection(session apiSession, selectors target.Selectors) *Selection {
 }
 
 // String returns a string representation of the selection, ex.
-//    selection 'CSS: .some-class | XPath: //table [3] | Link "click me" [single]'
+//
+//	selection 'CSS: .some-class | XPath: //table [3] | Link "click me" [single]'
 func (s *Selection) String() string {
 	return fmt.Sprintf("selection '%s'", s.selectors)
 }

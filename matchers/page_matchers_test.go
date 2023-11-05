@@ -3,11 +3,11 @@ package matchers_test
 import (
 	"time"
 
+	"github.com/doarvid/agouti"
+	. "github.com/doarvid/agouti/matchers"
+	"github.com/doarvid/agouti/matchers/internal/mocks"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/sclevine/agouti"
-	. "github.com/sclevine/agouti/matchers"
-	"github.com/sclevine/agouti/matchers/internal/mocks"
 )
 
 var _ = Describe("Page Matchers", func() {

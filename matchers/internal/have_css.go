@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/doarvid/agouti/matchers/internal/colorparser"
 	"github.com/onsi/gomega/format"
-	"github.com/sclevine/agouti/matchers/internal/colorparser"
 )
 
 type HaveCSSMatcher struct {

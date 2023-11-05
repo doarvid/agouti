@@ -3,9 +3,9 @@ package appium
 import (
 	"fmt"
 
-	"github.com/sclevine/agouti"
-	"github.com/sclevine/agouti/api/mobile"
-	"github.com/sclevine/agouti/internal/element"
+	"github.com/doarvid/agouti"
+	"github.com/doarvid/agouti/api/mobile"
+	"github.com/doarvid/agouti/internal/element"
 )
 
 type mobileSession interface {

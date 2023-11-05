@@ -1,6 +1,6 @@
 package agouti
 
-import "github.com/sclevine/agouti/internal/target"
+import "github.com/doarvid/agouti/internal/target"
 
 // A MultiSelection is a Selection that may be indexed using the At() method.
 // All Selection methods are available on a MultiSelection.
@@ -9,9 +9,13 @@ import "github.com/sclevine/agouti/internal/target"
 // parent of the MultiSelection refers to multiple elements.
 //
 // Examples:
-//    selection.All("section").All("form").At(1).Submit()
+//
+//	selection.All("section").All("form").At(1).Submit()
+//
 // Submits the second form in each section.
-//    selection.All("div").Find("h1").Click()
+//
+//	selection.All("div").Find("h1").Click()
+//
 // Clicks one h1 in each div, failing if any div does not contain exactly one h1.
 type MultiSelection struct {
 	Selection

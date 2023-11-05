@@ -3,7 +3,7 @@ package agouti
 import (
 	"fmt"
 
-	"github.com/sclevine/agouti/api"
+	"github.com/doarvid/agouti/api"
 )
 
 // A WebDriver controls a WebDriver process. This struct embeds api.WebDriver,
@@ -28,13 +28,15 @@ type WebDriver struct {
 // Any other provided Options are treated as default Options for new pages.
 //
 // Valid template parameters are:
-//   {{.Host}} - local address to bind to (usually 127.0.0.1)
-//   {{.Port}} - arbitrary free port on the local address
-//   {{.Address}} - {{.Host}}:{{.Port}}
+//
+//	{{.Host}} - local address to bind to (usually 127.0.0.1)
+//	{{.Port}} - arbitrary free port on the local address
+//	{{.Address}} - {{.Host}}:{{.Port}}
 //
 // Selenium JAR example:
-//   command := []string{"java", "-jar", "selenium-server.jar", "-port", "{{.Port}}"}
-//   agouti.NewWebDriver("http://{{.Address}}/wd/hub", command)
+//
+//	command := []string{"java", "-jar", "selenium-server.jar", "-port", "{{.Port}}"}
+//	agouti.NewWebDriver("http://{{.Address}}/wd/hub", command)
 func NewWebDriver(url string, command []string, options ...Option) *WebDriver {
 	apiWebDriver := api.NewWebDriver(url, command)
 	defaultOptions := config{Timeout: apiWebDriver.Timeout}.Merge(options)
@@ -46,11 +48,15 @@ func NewWebDriver(url string, command []string, options ...Option) *WebDriver {
 
 // NewPage returns a *Page that corresponds to a new WebDriver session.
 // Provided Options configure the page. For instance, to disable JavaScript:
-//    capabilities := agouti.NewCapabilities().Without("javascriptEnabled")
-//    driver.NewPage(agouti.Desired(capabilities))
+//
+//	capabilities := agouti.NewCapabilities().Without("javascriptEnabled")
+//	driver.NewPage(agouti.Desired(capabilities))
+//
 // For Selenium, a Browser Option (or a Desired Option with Capabilities that
 // specify a Browser) must be provided. For instance:
-//    seleniumDriver.NewPage(agouti.Browser("safari"))
+//
+//	seleniumDriver.NewPage(agouti.Browser("safari"))
+//
 // Specific Options (such as Browser) have precedence over Capabilities
 // specified by the Desired Option.
 //
